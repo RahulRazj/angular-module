@@ -1,0 +1,44 @@
+.brandColor {
+  color: #f0870a;
+}
+
+.main-container {
+  background-color: #144272;
+  color: whitesmoke;
+}
+
+.image-container img {
+  max-width: 91%;
+  margin: auto;
+  filter: brightness(45%) saturate(140%);
+}
+
+.carousel-caption {
+  color: whitesmoke;
+}
+
+.explore-category {
+  width: auto;
+  font-size: 18px;
+  background-color: #0f3256;
+  color: whitesmoke;
+  border: none;
+  border-radius: 4px;
+}
+
+.explore-category:hover {
+  background-color: #f0870a;
+  color: black;
+  text-decoration: solid;
+}
+
+.category-title {
+  background-color: rgb(235, 229, 229);
+  max-width: 95%;
+}
+
+.course-card:hover {
+  border: px solid rgb(138, 135, 135);
+  cursor: pointer;
+  filter: brightness(90%) saturate(140%);
+}

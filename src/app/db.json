@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  },
+  {
+    "id": 1,
+    "name": "The Complete Python Bootcamp From Zero to Hero in Python",
+    "description": "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games",
+    "rating": 4.6,
+    "category": "Python",
+    "price": 3199,
+    "content": [
+      {
+        "title": "Course Overview",
+        "lessons": [{ "name": "Welcome Message", "type": "V" }]
+      }
+    ],
+    "image": "./images/img.jpg",
+    "studentsEnrolled": 435,
+    "instructorDetails": {
+      "name": "John Doe",
+      "intro": "Good",
+      "profile": "Teacher",
+      "image": "./images/img.jpg"
+    }
+  }
+]

@@ -1,0 +1,51 @@
+.navbar {
+  background-color: #0f3256;
+}
+
+.container-fluid a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.container-fluid a:hover {
+  color: #f0870a;
+}
+
+.brandPrimary {
+  color: #f0870a;
+  font-size: 38px;
+  line-height: 1.3rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.search .btn {
+  color: #f0870a;
+  border: 1px solid #f0870a;
+}
+
+.search-input {
+  max-width: 50%;
+}
+
+.search-input:focus {
+  border-color: #f0870a !important;
+  box-shadow: 0 0 5px rgba(98, 101, 228, 1) !important;
+}
+
+.search-input {
+  margin-right: 100px;
+}
+
+.search .btn:hover {
+  background-color: #f0870a;
+  color: black;
+}
+
+.nav-item {
+  font-size: 18px;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,100 @@
+<app-header></app-header>
+
+<div class="container-fluid main-container p-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4 px-5 d-flex flex-column justify-content-center">
+      <p class="display-4 text-center py-3">
+        All <span class="brandColor">Courses</span> at one place.
+      </p>
+      <p class="display-5 text-center">
+        Everything that you <span class="brandColor">Need</span>.
+      </p>
+    </div>
+
+    <div class="col-md-8 d-flex flex-column justify-content-center">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner image-container">
+          <div class="carousel-item active">
+            <img
+              src="/assets/images/pace.jpg"
+              class="d-block w-100"
+              alt="study image"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <p class="display-5">Learn at your pace</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="/assets/images/weekly-plan.jpg"
+              class="d-block w-100"
+              alt="study image"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <p class="display-5">Plan your study</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="/assets/images/connect.jpg"
+              class="d-block w-100"
+              alt="study image"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <p class="display-5">Connect with peers</p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExample"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row px-4 pt-4">
+    <p class="display-6 text-center">Explore courses on different Categories</p>
+    <div
+      class="row d-flex justify-content-center"
+      *ngFor="let category of courseCategories"
+    >
+      <h2
+        *ngIf="courses[category].length"
+        class="text-center category-title py-2"
+      >
+        {{ category }}
+      </h2>
+      <div class="category p-4 flex-wrap d-flex justify-content-around">
+        <div *ngFor="let course of courses[category]">
+          <app-course-card
+            class="course-card"
+            [course]="course"
+            (click)="handleCourseClick(course.id)"
+          ></app-course-card>
+        </div>
+      </div>
+      <Button
+        class="explore-category text-center my-3 py-2"
+        *ngIf="courses[category].length > 3"
+        >Explore More</Button
+      >
+    </div>
+  </div>
+</div>

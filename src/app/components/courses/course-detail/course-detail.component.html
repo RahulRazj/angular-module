@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="container-fluid">
+  <div class="row course-detail-info pt-4 d-flex justify-content-center">
+    <div
+      class="col-md-6 course-info mx-4 d-flex flex-column justify-content-center"
+    >
+      <p class="display-6">{{ course?.name }}</p>
+      <p>{{ course?.description }}</p>
+      <p class="author-info">
+        <strong> Created by : {{ course?.instructorDetails?.name }}</strong>
+      </p>
+    </div>
+    <div class="col-md-3 course-card">
+      <app-course-card class="card-info" [course]="course"></app-course-card>
+      <div class="buy-course card" style="width: 18rem">
+        <h5 class="p-2 text-center">
+          <strong> {{ course?.price | currency : "INR" }}</strong>
+        </h5>
+        <Button class="btnBuyCourse">Buy this Course</Button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row pt-4 d-flex justify-content-center">
+    <div class="col-md-6 mx-4">
+      <h3>Course content</h3>
+      <div class="accordion shadow" id="accordionExample">
+        <div
+          class="accordion-item"
+          *ngFor="let content of course?.content; let i = index"
+        >
+          <h2 class="accordion-header">
+            <button
+              [attr.data-bs-target]="'#collapse' + (i + 1)"
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              {{ content.title }}
+            </button>
+          </h2>
+          <div
+            [attr.id]="'collapse' + (i + 1)"
+            class="accordion-collapse collapse show"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body" *ngFor="let lesson of content?.lessons">
+              <p>{{ lesson.name }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h3 class="pt-5">Course Contains</h3>
+    </div>
+  </div>
+</div>
