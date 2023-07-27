@@ -20,7 +20,7 @@ interface loginResponseData {
 })
 export class AuthService {
   // private apiUrl = 'http://localhost:3035/user';
-  private apiUrl = 'https://localhost:7287/api/auth';
+  private apiUrl = 'http://localhost:3000/users';
   constructor(private http: HttpClient) {}
 
   signup(
@@ -28,17 +28,15 @@ export class AuthService {
     email: string,
     password: string
   ): Observable<SignupResponseData> {
-    const signupUrl = `${this.apiUrl}/signup`;
-    return this.http.post<SignupResponseData>(signupUrl, {
+    return this.http.post<SignupResponseData>(this.apiUrl, {
       username,
       email,
       password,
-      role: 'admin',
     });
   }
 
   login(email: string, password: string): Observable<loginResponseData> {
-    const loginUrl = `${this.apiUrl}/login`;
-    return this.http.post<loginResponseData>(loginUrl, { email, password });
+    const loginUrl = `${this.apiUrl}?username=${email}&password=${password}`;
+    return this.http.get<loginResponseData>(loginUrl);
   }
 }

@@ -16,13 +16,17 @@
         <h5 class="p-2 text-center">
           <strong> {{ course?.price | currency : "INR" }}</strong>
         </h5>
-        <Button class="btnBuyCourse">Buy this Course</Button>
+        <Button
+          class="btnBuyCourse"
+          (click)="handleBuyCourse(course?.id || 1)"
+          >{{ isCourseBought ? "Goto Course" : "Buy this Course" }}</Button
+        >
       </div>
     </div>
   </div>
 
   <div class="row pt-4 d-flex justify-content-center">
-    <div class="col-md-6 mx-4">
+    <div class="col-md-6 m-4">
       <h3>Course content</h3>
       <div class="accordion shadow" id="accordionExample">
         <div
@@ -43,11 +47,19 @@
           </h2>
           <div
             [attr.id]="'collapse' + (i + 1)"
-            class="accordion-collapse collapse show"
+            class="accordion-collapse collapse"
             data-bs-parent="#accordionExample"
           >
-            <div class="accordion-body" *ngFor="let lesson of content?.lessons">
-              <p>{{ lesson.name }}</p>
+            <div
+              class="accordion-body d-flex"
+              *ngFor="let lesson of content?.lessons"
+            >
+              <i
+                *ngIf="lesson.type === 'VIDEO'"
+                class="bi bi-camera-video px-3"
+              ></i>
+              <i *ngIf="lesson.type === 'DOC'" class="bi bi-book px-3"></i>
+              <p class="accordion-lesson">{{ lesson.name }}</p>
             </div>
           </div>
         </div>
@@ -55,7 +67,30 @@
       </div>
     </div>
     <div class="col-md-3">
-      <h3 class="pt-5">Course Contains</h3>
+        <h3 class="pt-5">Course Contains</h3>
+        <ul>
+          <li>
+            <p>{{ course?.content?.length }} sections</p>
+          </li>
+          <li>
+            <p>
+              {{ course?.courseLengthHours }} hours
+              {{ course?.courseLengthMinutes }} minutes
+            </p>
+          </li>
+        </ul>
+      <div class="instructor-info d-flex flex-column justify-content-center">
+        <h3>Instructor</h3>
+        <img
+          class="author-image"
+          src="https://thispersondoesnotexist.com/"
+          alt=""
+        />
+        <p class="lead">{{course?.instructorDetails?.name}}</p>
+      </div>
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>
+

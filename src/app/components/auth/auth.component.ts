@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -10,11 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AuthComponent {
   isLoading = false;
-  isLoginMode = false;
+  isLoginMode = true;
   isSignupSuccess = false;
-  error = null;
+  error!: string | null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { isLoginMode: boolean };
     this.isLoginMode = state?.isLoginMode || false;
@@ -38,32 +37,9 @@ export class AuthComponent {
     if (this.isLoginMode) {
       this.isLoading = true;
 
-      this.authService.login(username, password).subscribe(
-        (res) => {
-          localStorage.setItem('userDetails', JSON.stringify(res.result));
-          this.router.navigate(['/']);
-        },
-        (errorRes) => {
-          this.error =
-            errorRes?.error?.errorMessages?.at(0) || 'Internal Server Error';
-          this.isLoading = false;
-        }
-      );
+      localStorage.setItem('userDetails', username);
+      this.router.navigate(['/']);
       this.isLoading = false;
-      return;
     }
-
-    this.isLoading = true;
-    this.authService.signup(username, email, password).subscribe(
-      (_) => {
-        this.isLoading = false;
-        this.isSignupSuccess = true;
-      },
-      (errorRes) => {
-        this.error =
-          errorRes?.error?.errorMessages?.at(0) || 'Internal Server Error';
-        this.isLoading = false;
-      }
-    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseService, ICourse } from 'src/app/services/course.service';
 
@@ -8,9 +8,13 @@ import { CourseService, ICourse } from 'src/app/services/course.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router, private courseServive: CourseService) {}
+  // 
+  @Output() searchCriteria = new EventEmitter<string>();
   courses: { [key: string]: any[] } = {};
 
+  constructor(private router: Router, private courseServive: CourseService) {}
+
+  // top categories defined for the home component
   courseCategories = [
     'Web Development',
     'Frontend Development',
@@ -19,43 +23,33 @@ export class HomeComponent implements OnInit {
     'Data Science',
   ];
 
+  // mapping category values with internal keys for filtering
+  categoryMapping: { [key: string]: string } = {
+    'Web Development': 'web-development',
+    'Frontend Development': 'frontend-development',
+    'Backend Development': 'backend-development',
+    Python: 'python',
+    'Data Science': 'data-science',
+  };
+
   ngOnInit(): void {
-    this.courseCategories.forEach(
-      (category) =>
-        (this.courses[category] =
-          this.courseServive.getCoursesByCategory(category))
-    );
+    // getting courses based on categories
+    this.courseServive.getCourses().subscribe((courses) => {
+      this.courseCategories.forEach(
+        (category) =>
+          (this.courses[category] = courses.filter((course) =>
+            course.category.includes(category)
+          ))
+      );
+    });
   }
 
   handleCourseClick(id: number) {
     this.router.navigate([`course/${id}`]);
   }
 
-  // courseCategories = [
-  //   {
-  //     categoryName: 'Web Development',
-  //     categoryId: 1,
-  //     totalCourses: 10,
-  //   },
-  //   {
-  //     categoryName: 'Frontend Development',
-  //     categoryId: 2,
-  //     totalCourses: 12,
-  //   },
-  //   {
-  //     categoryName: 'Backend Development',
-  //     categoryId: 3,
-  //     totalCourses: 16,
-  //   },
-  //   {
-  //     categoryName: 'JavaScript',
-  //     categoryId: 4,
-  //     totalCourses: 9,
-  //   },
-  //   {
-  //     categoryName: 'Data Science',
-  //     categoryId: 5,
-  //     totalCourses: 9,
-  //   },
-  // ];
+  handleExplore(id: string) {
+    this.router.navigate(['course'], { queryParams: { category: id } });
+    this.searchCriteria.emit(id);
+  }
 }

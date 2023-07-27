@@ -70,19 +70,19 @@
 
 <div class="container-fluid">
   <div class="row px-4 pt-4">
-    <p class="display-6 text-center">Explore courses on different Categories</p>
+    <p class="display-6 text-center">Explore top courses from different categories</p>
     <div
       class="row d-flex justify-content-center"
       *ngFor="let category of courseCategories"
     >
       <h2
-        *ngIf="courses[category].length"
+        *ngIf="courses[category]"
         class="text-center category-title py-2"
       >
         {{ category }}
       </h2>
       <div class="category p-4 flex-wrap d-flex justify-content-around">
-        <div *ngFor="let course of courses[category]">
+        <div *ngFor="let course of courses[category] | slice : 0 : 4">
           <app-course-card
             class="course-card"
             [course]="course"
@@ -91,10 +91,13 @@
         </div>
       </div>
       <Button
+        (click)="handleExplore(categoryMapping[category])"
         class="explore-category text-center my-3 py-2"
-        *ngIf="courses[category].length > 3"
+        *ngIf="courses[category].length > 4"
         >Explore More</Button
       >
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>

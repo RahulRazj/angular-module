@@ -1,8 +1,184 @@
 <app-header (searchCriteria)="searchThis($event)"></app-header>
-<div class="container-fluid m-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-8">
-            <h2 *ngIf="courseCount >= 0">{{courseCount | number }} results for "{{searchQuery}}"</h2>
-        </div>
+
+<div class="container m-5 px-5">
+  <div class="row d-flex flex-column justify-content-center">
+    <div class="col-md-5">
+      <h2 *ngIf="searchQuery">
+        <strong
+          >{{ courses.length | number }} results for "{{ searchQuery }}"</strong
+        >
+      </h2>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group mx-5 card my-4 sort-filter">
+        <button disabled class="py-1 sort-btn">Sort</button>
+        <select
+          class="form-control dropdown-option"
+          id="sortDropdown"
+          (change)="handleDropdownFilter($event)"
+        >
+          <option disabled selected value="-1" class="text-center">
+            Select
+          </option>
+          <option value="highestRated" value="1" class="text-center">
+            Highest Rated
+          </option>
+          <option value="mostReviewed" value="2" class="text-center">
+            Most Reviewed
+          </option>
+          <option value="mostEnrolled" value="4" class="text-center">
+            Most Enrolled
+          </option>
+          <option value="mostCheapest" value="3" class="text-center">
+            Cheapest
+          </option>
+        </select>
+      </div>
+
+      <hr />
+
+      <div class="form-group">
+        <label class="lead d-flex justify-content-center">Ratings</label>
+        <hr />
+        <div class="form-check d-flex justify-content-center">
+          <input
+            (click)="handleRatingFilter(4.5)"
+            type="radio"
+            name="radioInput"
+            class="form-check-input"
+          />
+          <app-star-rating [rating]="4.5"></app-star-rating>
+          <label class="form-check-label" for="ratingFilter1">4.5 and up</label>
+        </div>
+        <div class="form-check d-flex justify-content-center">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="radioInput"
+            (click)="handleRatingFilter(4)"
+          />
+          <app-star-rating [rating]="4"></app-star-rating>
+          <label class="form-check-label" for="ratingFilter2">4.0 and up</label>
+        </div>
+        <div class="form-check d-flex justify-content-center">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="radioInput"
+            (click)="handleRatingFilter(3.5)"
+          />
+          <app-star-rating [rating]="3.5"></app-star-rating>
+          <label class="form-check-label" for="ratingFilter3">3.5 and up</label>
+        </div>
+        <div class="form-check d-flex justify-content-center">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="radioInput"
+            (click)="handleRatingFilter(3.0)"
+          />
+          <app-star-rating [rating]="3"></app-star-rating>
+          <label class="form-check-label" for="ratingFilter4">3.0 and up</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <hr />
+        <label class="lead d-flex">Category</label>
+        <hr />
+        <div class="form-check d-flex">
+          <input
+            (click)="getCourseByCategory('frontend-development')"
+            type="radio"
+            name="radioFilterInput"
+            class="form-check-input mx-3"
+          />
+          <label class="form-check-label" for="ratingFilter1"
+            >Frontend Development</label
+          >
+        </div>
+        <div class="form-check d-flex">
+          <input
+            type="radio"
+            class="form-check-input mx-3"
+            name="radioFilterInput"
+            (click)="getCourseByCategory('web-development')"
+          />
+          <label class="form-check-label" for="ratingFilter2"
+            >Web Development</label
+          >
+        </div>
+        <div class="form-check d-flex">
+          <input
+            type="radio"
+            class="form-check-input mx-3"
+            name="radioFilterInput"
+            (click)="getCourseByCategory('backend-development')"
+          />
+          <label class="form-check-label" for="ratingFilter3"
+            >Backend Development</label
+          >
+        </div>
+        <div class="form-check d-flex">
+          <input
+            type="radio"
+            class="form-check-input mx-3"
+            name="radioFilterInput"
+            (click)="getCourseByCategory('python')"
+          />
+          <label class="form-check-label" for="ratingFilter4">Python</label>
+        </div>
+        <div class="form-check d-flex">
+          <input
+            type="radio"
+            class="form-check-input mx-3"
+            name="radioFilterInput"
+            (click)="getCourseByCategory('data-science')"
+          />
+          <label class="form-check-label" for="ratingFilter4"
+            >Data Science</label
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <div class="d-flex flex-column my-2" *ngFor="let course of courses">
+        <div
+          class="div d-flex course-card-list"
+          (click)="handleCourseClick(course.id)"
+        >
+          <div class="image p-3">
+            <img src="{{ course.image }}" width="260px" />
+            <p class="text-center">
+              <strong>
+                {{ course.price | currency : "INR" : "symbol" : "2.1" }}</strong
+              >
+            </p>
+          </div>
+          <div class="course-info">
+            <h6>
+              <strong>{{ course.name }}</strong>
+            </h6>
+            <p class="course-details">
+              {{ course.description }}
+            </p>
+            <p class="course-details lean">
+              <strong> Created by: {{ course.instructorDetails.name }}</strong>
+            </p>
+            <p class="course-details lean">
+              Students: {{ course.studentsEnrolled }}
+            </p>
+            <div class="rating-info d-flex">
+              <p class="course-details lean">{{ course.rating }}</p>
+              <app-star-rating [rating]="course.rating"></app-star-rating>
+              <p class="lean course-details">({{ course.noOfRatings }})</p>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
 </div>
