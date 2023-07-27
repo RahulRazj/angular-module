@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, find, filter } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 interface ILesson {
   name: string;
@@ -13,11 +15,15 @@ export interface ICourse {
   name: string;
   description: string;
   rating: number;
-  category: string;
+  category: string[];
   price: number;
   content: IContent[];
   image: string;
   studentsEnrolled: number;
+  noOfRatings: number;
+  courseLengthHours: number;
+  courseLengthMinutes: number;
+  noOfLectures: number;
   instructorDetails: {
     name: string;
     intro: string;
@@ -30,33 +36,60 @@ export interface ICourse {
   providedIn: 'root',
 })
 export class CourseService {
-  constructor() {}
+  private apiUrl: string = '/assets/db.json';
+  constructor(private http: HttpClient) {}
 
-  getCourses(): ICourse[] {
-    return this.courses;
+  getCourses(): Observable<ICourse[]> {
+    return this.http.get<ICourse[]>(this.apiUrl);
   }
 
-  getCoursesByCategory(category: string): ICourse[] {
-    return this.getCourses().filter(
-      (course: ICourse) => course.category === category
-    );
-  }
+  // getCoursesByCategory(category: string): ICourse[] {
+  //   let filteredCourses: ICourse[] = [];
+  //   console.log({ category });
+  //   this.getCourses().subscribe((courses: ICourse[]) => {
+  //     filteredCourses = courses.filter((course: ICourse) =>
+  //       course.category.includes(category)
+  //     );
+  //   });
+  //   return filteredCourses;
+  // }
 
-  getCourse(id: number): ICourse | undefined {
-    return this.getCourses()
-      .filter((course: ICourse) => course.id === id)
-      .at(0);
-  }
+  // getCourse(id: number): ICourse | undefined {
+  //   let filteredCourse: ICourse | undefined;
+  //   this.getCourses().subscribe(
+  //     (courses: ICourse[]) =>
+  //       (filteredCourse = courses
+  //         .filter((course: ICourse) => course.id === id)
+  //         .at(0))
+  //   );
+  //   return filteredCourse;
+  // }
 
-  searchCourses(searchParams: string): ICourse[] {
-    console.log({ searchParams });
-    return this.getCourses().filter(
-      (course: ICourse) =>
-        course.name.toLowerCase().includes(searchParams.toLowerCase()) ||
-        course.description.toLowerCase().includes(searchParams.toLowerCase()) ||
-        course.category.toLowerCase().includes(searchParams.toLowerCase())
-    );
-  }
+  // getCoursesByRating(rating: number): ICourse[] {
+  //   let filteredCourses: ICourse[] = [];
+  //   this.getCourses().subscribe(
+  //     (courses: ICourse[]) =>
+  //       (filteredCourses = courses.filter((course) => course.rating >= rating))
+  //   );
+  //   return filteredCourses;
+  // }
+
+  // searchCourses(searchParams: string): ICourse[] {
+  //   let filteredCourses: ICourse[] = [];
+
+  //   this.getCourses().subscribe(
+  //     (courses: ICourse[]) =>
+  //       (filteredCourses = courses.filter(
+  //         (course: ICourse) =>
+  //           course.name.toLowerCase().includes(searchParams.toLowerCase()) ||
+  //           course.description
+  //             .toLowerCase()
+  //             .includes(searchParams.toLowerCase())
+  //       ))
+  //   );
+
+  //   return filteredCourses;
+  // }
 
   courses: ICourse[] = [
     {
@@ -64,8 +97,10 @@ export class CourseService {
       name: 'The Complete Python Bootcamp From Zero to Hero in Python',
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
-      rating: 4.6,
-      category: 'Web Development',
+      rating: 3.6,
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      category: ['Web Development'],
       price: 3199,
       content: [
         {
@@ -97,6 +132,9 @@ export class CourseService {
       ],
       image: '/assets/images/python.jpg',
       studentsEnrolled: 4353,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+
       instructorDetails: {
         name: 'John Doe',
         intro: 'Good',
@@ -110,8 +148,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Frontend Development',
+      noOfLectures: 42,
+      category: ['Frontend Development'],
       price: 3199,
+      courseLengthHours: 1130,
+      noOfRatings: 34521,
+      courseLengthMinutes: 24,
       content: [
         {
           title: 'Course Overview',
@@ -137,8 +179,12 @@ export class CourseService {
       name: 'The Complete Python Bootcamp From Zero to Hero in Python',
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
-      rating: 4.6,
-      category: 'Backend Developemnt',
+      rating: 2.6,
+      noOfLectures: 42,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      noOfRatings: 34521,
+      category: ['Backend Development'],
       price: 3199,
       content: [
         {
@@ -166,8 +212,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Data Science',
+      noOfLectures: 42,
+      category: ['Data Science'],
+      noOfRatings: 34521,
       price: 3199,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
       content: [
         {
           title: 'Course Overview',
@@ -193,9 +243,13 @@ export class CourseService {
       name: 'The Complete Python Bootcamp From Zero to Hero in Python',
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
-      rating: 4.6,
-      category: 'Data Science',
+      rating: 3.1,
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      category: ['Data Science'],
       price: 3199,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
       content: [
         {
           title: 'Course Overview',
@@ -222,7 +276,11 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Backend Development',
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      category: ['Backend Development'],
       price: 3199,
       content: [
         {
@@ -250,8 +308,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Frontend Development',
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      category: ['Frontend Development'],
       price: 3199,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
       content: [
         {
           title: 'Course Overview',
@@ -278,8 +340,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Data Science',
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      category: ['Data Science'],
       price: 3199,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
       content: [
         {
           title: 'Course Overview',
@@ -306,8 +372,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Python',
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      category: ['Python'],
       price: 3199,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
       content: [
         {
           title: 'Course Overview',
@@ -334,7 +404,11 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Frontend Development',
+      noOfLectures: 42,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      noOfRatings: 34521,
+      category: ['Frontend Development'],
       price: 3199,
       content: [
         {
@@ -362,7 +436,11 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Backend Development',
+      noOfLectures: 42,
+      courseLengthHours: 1130,
+      noOfRatings: 34521,
+      courseLengthMinutes: 24,
+      category: ['Backend Development'],
       price: 3199,
       content: [
         {
@@ -390,7 +468,11 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Python',
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      category: ['Python'],
       price: 3199,
       content: [
         {
@@ -418,8 +500,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Web Development',
+      courseLengthHours: 1130,
+      noOfRatings: 34521,
+      courseLengthMinutes: 24,
+      category: ['Web Development'],
       price: 3199,
+      noOfLectures: 42,
       content: [
         {
           title: 'Course Overview',
@@ -446,7 +532,10 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Frontend',
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      noOfRatings: 34521,
+      category: ['Frontend Development'],
       price: 3199,
       content: [
         {
@@ -461,6 +550,7 @@ export class CourseService {
       ],
       image: '/assets/images/python.jpg',
       studentsEnrolled: 435,
+      noOfLectures: 42,
       instructorDetails: {
         name: 'John Doe',
         intro: 'Good',
@@ -474,14 +564,18 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Backend',
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      noOfLectures: 42,
+      noOfRatings: 34521,
+      category: ['Backend Development'],
       price: 3199,
       content: [
         {
-          title: 'Course Overview',
+          title: 'Course Overview Intro',
           lessons: [
             {
-              name: 'Welcome Message',
+              name: 'Welcome Message version 2',
               type: 'VIDEO',
             },
           ],
@@ -502,8 +596,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Backend',
+      category: ['Web Development'],
       price: 3199,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      noOfLectures: 42,
+      noOfRatings: 34521,
       content: [
         {
           title: 'Course Overview',
@@ -530,8 +628,12 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Frontend Development',
+      category: ['Frontend Development'],
       price: 3199,
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      noOfRatings: 34521,
+      noOfLectures: 42,
       content: [
         {
           title: 'Course Overview',
@@ -558,7 +660,11 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Data Science',
+      courseLengthHours: 1130,
+      courseLengthMinutes: 24,
+      noOfLectures: 42,
+      category: ['Data Science'],
+      noOfRatings: 34521,
       price: 3199,
       content: [
         {
@@ -586,7 +692,11 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Python',
+      courseLengthHours: 1130,
+      noOfRatings: 34521,
+      courseLengthMinutes: 24,
+      noOfLectures: 42,
+      category: ['Python'],
       price: 3199,
       content: [
         {
@@ -614,7 +724,11 @@ export class CourseService {
       description:
         'Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games',
       rating: 4.6,
-      category: 'Web Development',
+      courseLengthHours: 1130,
+      noOfRatings: 34521,
+      courseLengthMinutes: 24,
+      noOfLectures: 42,
+      category: ['Web Development'],
       price: 3199,
       content: [
         {

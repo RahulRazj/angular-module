@@ -18,6 +18,11 @@
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+.dropdown-item:hover {
+  background-color: rgb(242, 236, 236);
+  cursor: pointer;
+}
+
 .search .btn {
   color: #f0870a;
   border: 1px solid #f0870a;
@@ -39,6 +44,10 @@
 .search .btn:hover {
   background-color: #f0870a;
   color: black;
+}
+
+.logout-text {
+  color: black !important;
 }
 
 .nav-item {

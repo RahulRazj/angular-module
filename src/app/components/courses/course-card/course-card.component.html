@@ -2,6 +2,7 @@
   <img class="card-img-top" src="{{ course.image }}" alt="Card image cap" />
   <div class="card-body">
     <h5 class="card-title text-center">{{ course.name }}</h5>
+    <p>{{course.instructorDetails.name}}</p>
     <p>
       Rating: {{ course.rating }} ({{ course.studentsEnrolled | number }})
       <app-star-rating [rating]="course.rating"></app-star-rating>

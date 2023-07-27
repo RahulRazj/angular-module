@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<div class="container-fluid m-5 p-5 d-flex justify-content-center">
+  <div class="unauthorized-course" *ngIf="!isCourseBought">
+    <h2>Buy the course first to play</h2>
+    <button (click)="handleBuyCourse(course?.id || 1)">Buy Course</button>
+  </div>
+  <div *ngIf="isCourseBought" class="video">
+    <iframe
+      id="vidframe"
+      src="https://www.youtube.com/embed/AE3iXR1JFak"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <app-course-card class="card-info px-5" [course]="course"></app-course-card>
+</div>
